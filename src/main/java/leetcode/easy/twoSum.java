@@ -1,5 +1,7 @@
 package leetcode.easy;
 
+import java.util.HashMap;
+
 /**
  * @ClassName twoSum
  * @Author laixiaoxing
@@ -37,11 +39,107 @@ package leetcode.easy;
 public class twoSum {
 
     public static void main(String[] args) {
-        twoSum(null,1);
+        int[] nums = {3, 2, 4};
+        int target = 6;
+        int[] aa = twoSum(nums, target);
+        for (int i : aa) {
+            System.out.println(i);
+        }
+
+
+        int[] bb = twoSum2(nums, target);
+        for (int i : bb) {
+            System.out.println(i);
+        }
+
+
+        int[] cc = twoSum3(nums, target);
+        for (int i : cc) {
+            System.out.println(i);
+        }
+
     }
 
+    /**
+     * 蛮力法 nxn 复杂度
+     * @param nums
+     * @param target
+     * @return
+     */
     public static int[] twoSum(int[] nums, int target) {
-        return null;
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if ((nums[i] + nums[j]) == target) {
+                    int[] num = {i, j};
+                    return num;
+                }
+
+            }
+        }
+        int[] num = {};
+        return num;
     }
+
+
+    /**
+     * map法 n+n复杂度
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int[] twoSum2(int[] nums, int target) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int i = 0;
+        for (int num : nums) {
+            map.put(num, i);
+            i++;
+        }
+
+        for (int i1 = 0; i1 < nums.length; i1++) {
+            int a = target - nums[i1];
+            if (map.get(a) != null) {
+                if (map.get(a)==i1){
+                    continue;
+                }
+                int[] num = {i1, map.get(a)};
+                return num;
+            }
+        }
+
+        int[] num = {};
+        return num;
+    }
+
+
+    /**
+     * map法 n复杂度
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int[] twoSum3(int[] nums, int target) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i1 = 0; i1 < nums.length; i1++) {
+            int a = target - nums[i1];
+            if (map.get(a) != null) {
+                if (map.get(a)==i1){
+                    continue;
+                }
+                int[] num = {map.get(a),i1};
+                return num;
+            }else {
+                map.put(nums[i1],i1);
+            }
+        }
+
+        int[] num = {};
+        return num;
+    }
+
+
 }
 
