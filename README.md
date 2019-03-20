@@ -1,6 +1,10 @@
 # offersword
 剑指offer日常刷题
 
+leetCode 文件夹内是leecode的题目
+offerSword文件夹内是剑指offer的题目
+
+
 ## 程序员如何面试？
 
 **一，代码的完整性和鲁棒性**  
