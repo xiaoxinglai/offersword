@@ -1,4 +1,4 @@
-package leetcode.easy;
+package leetcode.easy.twoSum;
 
 import java.util.HashMap;
 
@@ -41,10 +41,10 @@ public class twoSum {
     public static void main(String[] args) {
         int[] nums = {3, 2, 4};
         int target = 6;
-        int[] aa = twoSum(nums, target);
-        for (int i : aa) {
-            System.out.println(i);
-        }
+//        int[] aa = twoSum(nums, target);
+//        for (int i : aa) {
+//            System.out.println(i);
+//        }
 
 
         int[] bb = twoSum2(nums, target);
@@ -53,10 +53,10 @@ public class twoSum {
         }
 
 
-        int[] cc = twoSum3(nums, target);
-        for (int i : cc) {
-            System.out.println(i);
-        }
+//        int[] cc = twoSum3(nums, target);
+//        for (int i : cc) {
+//            System.out.println(i);
+//        }
 
     }
 
@@ -100,9 +100,9 @@ public class twoSum {
         for (int i1 = 0; i1 < nums.length; i1++) {
             int a = target - nums[i1];
             if (map.get(a) != null) {
-                if (map.get(a)==i1){
-                    continue;
-                }
+                 if (map.get(a)==i1){
+                     continue;
+                 }
                 int[] num = {i1, map.get(a)};
                 return num;
             }
