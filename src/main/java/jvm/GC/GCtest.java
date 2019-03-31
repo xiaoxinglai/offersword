@@ -1,5 +1,7 @@
 package jvm.GC;
 
+import java.util.Scanner;
+
 /**
  * @ClassName GCtest
  * @Author laixiaoxing
@@ -14,12 +16,14 @@ public class GCtest {
 
     public static void testAllocation() {
         byte[] allocation1, allocation2, allocation3, allocation4;
-        allocation1 = new byte[2 * _1MB];
+        allocation1 = new byte[ 2*_1MB];
         allocation2 = new byte[2 * _1MB];
         allocation3 = new byte[2 * _1MB];
-        //出现一次minor GC
         allocation4 = new byte[4 * _1MB];
-
+        Scanner in =new Scanner(System.in);
+        //输入一个整数
+        int a=in.nextInt();
+        System.out.println(a);
     }
 
 
