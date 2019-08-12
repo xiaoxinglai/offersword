@@ -66,6 +66,10 @@ public class Solution {
         int current = 0;
         for (char c : s.toCharArray()) {
             //IV IX  XL XC  CD CM 等特殊值的处理
+            //会发现 右边数字是左边数字的5倍或者10倍的时候，就要特殊处理 此时的值为当前值减去2倍的前一个值
+            //比如说IV 为 1+5-2 值为4
+            //iX为  1+10-2 为9
+            //为什么会这样，因为当前总值已经包含了一个之前值，所以要减去， 然后现在的这个值也等于当前这个字符代表的值减去它前一个字符代表的值
             current = map.get(c);
             if (pre != 0) {
                 if (current /pre == 5 || current / pre == 10) {
