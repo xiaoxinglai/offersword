@@ -17,7 +17,7 @@ public class Solution {
     public static void main(String[] args) {
         int[] i = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
-        int res = maxSubArray2(i);
+        int res = maxSubArray3(i);
         System.out.println(res);
 
     }
@@ -61,9 +61,8 @@ public class Solution {
     public static int maxSubArray2(int[] nums) {
         //记录最大和
         int res = Integer.MIN_VALUE;
-        //记录当前和
-
         for (int i = 0; i < nums.length; ++i) {
+            //记录当前和
             int sum = 0;
             for (int j = i; j < nums.length; j++) {
                 sum = sum + nums[j];
@@ -71,7 +70,29 @@ public class Solution {
             }
         }
         return res;
-
-
     }
+
+
+
+    //{a,b,c,d}
+    //a ,a+b,a+b+c ,a+b+c+d
+    //b,b+c,b+c+d
+    //这里会发现，很多都重复计算了
+    //动态规划 剪枝  比如 a+b之后的值，比b本身还小，说明a对b来说是负增益的 ，因此a直接丢弃 新的序列从b开始算起
+    //同理可推到当a为 a+b+c... 时候
+
+    public static int maxSubArray3(int[] nums) {
+        //记录最大和
+        int res = Integer.MIN_VALUE;
+        int sum=0;
+        for (int i = 0; i < nums.length; ++i) {
+
+           //sum+nums[i]之后的值，比nums[i]本身还小，说明sum对nums[i]来说是负增益的 ，因此sum直接丢弃 新的序列从num[i]开始算起
+            sum=Math.max(sum+nums[i],nums[i]);
+            //记录最大的序列和
+            res=Math.max(res,sum);
+        }
+        return res;
+    }
+
 }
