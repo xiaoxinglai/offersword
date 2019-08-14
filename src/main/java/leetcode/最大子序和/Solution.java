@@ -17,7 +17,7 @@ public class Solution {
     public static void main(String[] args) {
         int[] i = new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
-        int res = maxSubArray(i);
+        int res = maxSubArray2(i);
         System.out.println(res);
 
     }
@@ -38,10 +38,37 @@ public class Solution {
         int res = Integer.MIN_VALUE;
         //记录当前和
         int sum = -1;
-        for(int i = 0; i < nums.length; ++i)
-        {
+        for (int i = 0; i < nums.length; ++i) {
             sum = Math.max(nums[i], sum + nums[i]);
             res = Math.max(sum, res);
+        }
+        return res;
+
+
+    }
+
+
+    /**
+     * 使用暴力穷举法 时间复杂n*n
+     * 思路：找到以第一个元素开头的所有序列中 最大的
+     * 找到第二个元素开头的所有序列中 最大的
+     * ...
+     * 然后找出这些最大的里面中最大的
+     *
+     * @param nums
+     * @return
+     */
+    public static int maxSubArray2(int[] nums) {
+        //记录最大和
+        int res = Integer.MIN_VALUE;
+        //记录当前和
+
+        for (int i = 0; i < nums.length; ++i) {
+            int sum = 0;
+            for (int j = i; j < nums.length; j++) {
+                sum = sum + nums[j];
+                res = Math.max(sum, res);
+            }
         }
         return res;
 
