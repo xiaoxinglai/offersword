@@ -1,5 +1,6 @@
 package leetcode.罗马数字转整数;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -72,8 +73,8 @@ public class Solution {
             //为什么会这样，因为当前总值已经包含了一个之前值，所以要减去， 然后现在的这个值也等于当前这个字符代表的值减去它前一个字符代表的值
             current = map.get(c);
             if (pre != 0) {
-                if (current /pre == 5 || current / pre == 10) {
-                    res=res+ (current-pre)-pre;
+                if (current / pre == 5 || current / pre == 10) {
+                    res = res + (current - pre) - pre;
                     pre = current;
                     continue;
                 }
@@ -86,6 +87,15 @@ public class Solution {
     }
 
     public static void main(String[] args) {
+
+
+         int a = 0;
+
+        ArrayList list = new ArrayList();
+        
+
+
+
         System.out.println(romanToInt("MCMXCIV"));
     }
 }
