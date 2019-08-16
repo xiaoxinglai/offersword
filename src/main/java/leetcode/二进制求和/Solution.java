@@ -45,12 +45,12 @@ public class Solution {
         while (t != 0 || i < big.length) {
             t = sum(big, sm, i, t);
             i++;
-            if (i==big.length){
+            if (i == big.length) {
                 break;
             }
         }
 
-        if (t==1){
+        if (t == 1) {
             char[] newbig = new char[big.length + 1];
             for (int i1 = 0; i1 < big.length; i1++) {
                 newbig[i1 + 1] = big[i1];
@@ -60,7 +60,7 @@ public class Solution {
 
         }
 
-        return  String.valueOf(big);
+        return String.valueOf(big);
 
     }
 
@@ -79,7 +79,7 @@ public class Solution {
         } else {
             tag = big[big.length - 1 - i] - '0' + t;
         }
-        big[big.length - 1 - i]=(char)('0'+tag%2);
+        big[big.length - 1 - i] = (char) ('0' + tag % 2);
         if (tag > 1) {
             return 1;
         } else {
@@ -92,5 +92,51 @@ public class Solution {
     public static void main(String[] args) {
         String sum = addBinary("1010", "1011");
         System.out.println(sum);
+    }
+
+
+    /**
+     * 利用字符串的charAt和reverse简化以上的实现
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public static String addBinary2(String a, String b) {
+        //长度
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        StringBuilder sb = new StringBuilder();
+
+        //是否需要进一位
+        int plus = 0;
+
+        while (i >= 0 || j >= 0) {
+            //单个位数的和
+            int sum = 0;
+
+            //交换律和结合律
+            if (i >= 0) {
+                sum = sum + (a.charAt(  i) - '0');
+                i--;
+            }
+            if (j >= 0) {
+                sum = sum + (b.charAt( j) - '0');
+                j--;
+            }
+
+            //和加上进一位
+            sum = sum + plus;
+            //记录当前位置数的值
+            int curr = sum % 2;
+            sb.append(curr);
+            plus = sum / 2;
+        }
+
+        if (plus == 1) {
+
+            sb.append(plus);
+        }
+        return sb.reverse().toString();
     }
 }
