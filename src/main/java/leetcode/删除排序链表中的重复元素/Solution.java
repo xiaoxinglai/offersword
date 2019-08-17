@@ -93,7 +93,7 @@ public class Solution {
                 j = j.next;
             }
             i.next = j;
-            i=i.next;
+            i = i.next;
         }
         return head;
 
@@ -108,19 +108,39 @@ public class Solution {
     public static void main(String[] args) {
         ListNode a = new ListNode(1);
         ListNode b = new ListNode(1);
-        ListNode c = new ListNode(1);
-        ListNode d = new ListNode(1);
-        ListNode e = new ListNode(2);
+        ListNode c = new ListNode(2);
+//        ListNode d = new ListNode(2);
+//        ListNode e = new ListNode(2);
         a.next = b;
         b.next = c;
-        c.next = d;
-        d.next = e;
-        deleteDuplicates2(a);
+//        c.next = d;
+//        d.next = e;
+        deleteDuplicates3(a);
         while (a != null) {
             System.out.print(a.val);
             a = a.next;
         }
+    }
 
+
+    /**
+     * 单指针 直接遍历，看自己和自己下一个是不是相同，如果是的话就看自己和自己下一个的下一个是不是相同
+     * 直到找到一个和自己下一个不相同的，就把自己的下一个设置成那个
+     *
+     * @param head
+     * @return
+     */
+    public static ListNode deleteDuplicates3(ListNode head) {
+        ListNode f=head;
+        while (head != null && head.next != null) {
+            if (head.val == head.next.val) {
+                head.next=head.next.next;
+            }else {
+                head=head.next;
+            }
+        }
+
+        return f;
     }
 
 }
