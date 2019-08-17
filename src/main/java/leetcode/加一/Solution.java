@@ -22,7 +22,7 @@ public class Solution {
 
     public static void main(String[] args) {
         int[] aa = new int[]{1, 9, 9, 9};
-        int[] res = plusOne(aa);
+        int[] res = plusOne2(aa);
         for (int re : res) {
             System.out.print(re);
         }
@@ -56,5 +56,38 @@ public class Solution {
             digits[i] = 0;
         }
         return digits[i];
+    }
+
+
+    /**
+     * 简化版的二进制求和
+     */
+    public static int[] plusOne2(int[] digits) {
+
+        int i = digits.length - 1;
+        int plus = 0;
+        StringBuilder sb = new StringBuilder();
+        while (i >= 0) {
+            int sum = 0;
+            if (i == digits.length - 1) {
+                sum = digits[i] + 1 + plus;
+            } else {
+                sum = digits[i] + plus;
+            }
+            sb = sb.append(sum % 10);
+            plus = sum / 10;
+            i--;
+        }
+
+        if (plus == 1) {
+            sb = sb.append("1");
+        }
+
+        char[] res = sb.reverse().toString().toCharArray();
+        int[] intres = new int[res.length];
+        for (int i1 = 0; i1 < res.length; i1++) {
+            intres[i1] = res[i1] - '0';
+        }
+        return intres;
     }
 }
