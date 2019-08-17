@@ -39,8 +39,8 @@ package leetcode.删除排序数组中的重复项;
 public class Solution {
 
     public static void main(String[] args) {
-        int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-        int t = removeDuplicates2(nums);
+        int[] nums = {1, 1};
+        int t = removeDuplicates(nums);
         System.out.println(t);
         for (int i = 0; i < t; i++) {
             System.out.println(nums[i]);
