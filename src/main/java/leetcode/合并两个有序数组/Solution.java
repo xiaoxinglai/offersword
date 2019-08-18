@@ -1,5 +1,7 @@
 package leetcode.合并两个有序数组;
 
+import java.util.Arrays;
+
 /**
  * 给定两个有序整数数组 nums1 和 nums2，将 nums2 合并到 nums1 中，使得 num1 成为一个有序数组。
  * <p>
@@ -17,11 +19,30 @@ package leetcode.合并两个有序数组;
  */
 public class Solution {
 
+
+    /**
+     * 利用System.arraycopy(源数组，源数组的位置，目标数组，目标数组位置，要拷贝的长度);
+     * 然后利用Arrays的sort方法
+     * 本质上就是先合并数组，然后再快速排序
+
+     时间复杂度 : O((n + m)\log(n + m))O((n+m)log(n+m))。
+     空间复杂度 : O(1)O(1)。
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public static void merge3(int[] nums1, int m, int[] nums2, int n) {
+        System.arraycopy(nums2, 0, nums1, m, n);
+        Arrays.sort(nums1);
+    }
+
+
     /**
      * 利用数组是有序的这点，说明 每个数组最大的必定是在最后一个，那么只要比较最后一个，就可以找出最大的
      * 将最大的放到nums1的最后一个位置
-     *
-     *这里的时间复杂度为n 因为充分利用到了数组有序这个特点
+     * <p>
+     * 这里的时间复杂度为n 因为充分利用到了数组有序这个特点
      *
      * @param nums1
      * @param m
@@ -131,11 +152,11 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        int[] nums1 = new int[]{1,2,3,0,0,0};
+        int[] nums1 = new int[]{1, 2, 3, 0, 0, 0};
         int m = 3;
-        int[] nums2 = new int[]{3,5,6};
+        int[] nums2 = new int[]{3, 5, 6};
         int n = 3;
-        merge2(nums1, m, nums2, n);
+        merge3(nums1, m, nums2, n);
         //   System.out.println(postion(nums1, 2));
 
         // insert(nums1,2,1);
