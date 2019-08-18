@@ -21,12 +21,87 @@ public class Solution {
 
 
     /**
+     * 双指针法 从头开始， 时间复杂度为n+m ,空间复杂度为n 因为nums1是输出数组，所以要先将nums1里面的内容先拷贝出来
+     *
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public static void merge5(int[] nums1, int m, int[] nums2, int n) {
+        int[] cp=new int[m];
+        System.arraycopy(nums1,0,cp,0,m);
+
+        int p1 = 0;
+        int p2 = 0;
+        int p = 0;
+
+        while (p1 <m && p2 < n) {
+
+            if (cp[p1] < nums2[p2]) {
+                nums1[p] = cp[p1];
+                p1++;
+            } else {
+                nums1[p] = nums2[p2];
+                p2++;
+            }
+            p++;
+        }
+
+        if (p1 ==m) {
+            //已经合并的长度为p1+p2 剩下长度为m+n-p1-p2
+            System.arraycopy(nums2, p2, nums1, p1 + p2, m + n - p1 - p2);
+        }
+
+        if (p2==n){
+            System.arraycopy(cp, p1, nums1, p1 + p2, m + n - p1 - p2);
+        }
+    }
+
+
+
+
+
+    /**
+     * 双指针法 从尾开始， 时间复杂度为n+m ,空间复杂度为1
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public static void merge4(int[] nums1, int m, int[] nums2, int n) {
+        int p1 = m - 1;
+        int p2 = n - 1;
+        int p = m + n - 1;
+
+        while (p1 >= 0 && p2 >= 0) {
+
+            if (nums1[p1] > nums2[p2]) {
+                nums1[p] = nums1[p1];
+                p1--;
+            } else {
+                nums1[p] = nums2[p2];
+                p2--;
+            }
+            p--;
+        }
+
+        if (p1 < 0) {
+            System.arraycopy(nums2, 0, nums1, 0, p2 - p1);
+        }
+    }
+
+
+    /**
      * 利用System.arraycopy(源数组，源数组的位置，目标数组，目标数组位置，要拷贝的长度);
      * 然后利用Arrays的sort方法
      * 本质上就是先合并数组，然后再快速排序
-
-     时间复杂度 : O((n + m)\log(n + m))O((n+m)log(n+m))。
-     空间复杂度 : O(1)O(1)。
+     * <p>
+     * 时间复杂度 : O((n + m)\log(n + m))O((n+m)log(n+m))。
+     * 空间复杂度 : O(1)O(1)。
+     *
      * @param nums1
      * @param m
      * @param nums2
@@ -152,11 +227,11 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        int[] nums1 = new int[]{1, 2, 3, 0, 0, 0};
+        int[] nums1 = new int[]{1,2,3,0,0,0};
         int m = 3;
-        int[] nums2 = new int[]{3, 5, 6};
+        int[] nums2 = new int[]{2,5,6};
         int n = 3;
-        merge3(nums1, m, nums2, n);
+        merge5(nums1, m, nums2, n);
         //   System.out.println(postion(nums1, 2));
 
         // insert(nums1,2,1);
