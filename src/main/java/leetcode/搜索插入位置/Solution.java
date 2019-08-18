@@ -44,7 +44,7 @@ public class Solution {
         int max = nums.length - 1;
         while (min <=max) {
             int mid = (min + max) / 2;
-            if (nums[mid] == target) {
+            if (nums[mid] == target) { //注意！ 每一次新的边界值 都不包含中间值
                 return mid;
             } else if (nums[mid] > target) {
                 max = mid - 1;
