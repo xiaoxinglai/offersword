@@ -71,7 +71,6 @@ public class Solution {
             //由x的最后一位组合成的数字
             rev = rev * 10 + r;
         }
-
         //用long去比较
         if(rev > Integer.MAX_VALUE || rev < Integer.MIN_VALUE){
             return 0;

@@ -23,21 +23,20 @@ public class Solution {
     /**
      * 双指针法 从头开始， 时间复杂度为n+m ,空间复杂度为n 因为nums1是输出数组，所以要先将nums1里面的内容先拷贝出来
      *
-     *
      * @param nums1
      * @param m
      * @param nums2
      * @param n
      */
     public static void merge5(int[] nums1, int m, int[] nums2, int n) {
-        int[] cp=new int[m];
-        System.arraycopy(nums1,0,cp,0,m);
+        int[] cp = new int[m];
+        System.arraycopy(nums1, 0, cp, 0, m);
 
         int p1 = 0;
         int p2 = 0;
         int p = 0;
 
-        while (p1 <m && p2 < n) {
+        while (p1 < m && p2 < n) {
 
             if (cp[p1] < nums2[p2]) {
                 nums1[p] = cp[p1];
@@ -49,18 +48,15 @@ public class Solution {
             p++;
         }
 
-        if (p1 ==m) {
+        if (p1 == m) {
             //已经合并的长度为p1+p2 剩下长度为m+n-p1-p2
             System.arraycopy(nums2, p2, nums1, p1 + p2, m + n - p1 - p2);
         }
 
-        if (p2==n){
+        if (p2 == n) {
             System.arraycopy(cp, p1, nums1, p1 + p2, m + n - p1 - p2);
         }
     }
-
-
-
 
 
     /**
@@ -164,7 +160,7 @@ public class Solution {
      * @param nums2
      * @param n
      */
-    public static void merge1(int[] nums1, int m, int[] nums2, int n) {
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
 
 
         int j = 0;
@@ -189,6 +185,9 @@ public class Solution {
     static int postion(int[] nums1, int n) {
         int min = 0;
         int max = 0;
+        if (n == 1 && nums1[0] == 0) {
+            return 0;
+        }
         for (int i = 1; i < nums1.length; i++) {
             if (nums1[i] == max) {
                 max = i - 1;
@@ -211,6 +210,11 @@ public class Solution {
 
 
     static void insert(int[] nums1, int tar, int position) {
+        if (position == 0) {
+            nums1[position] = tar;
+            return;
+        }
+
         int max = 0;
         for (int i = 1; i < nums1.length; i++) {
             if (nums1[i] == max) {
@@ -227,11 +231,11 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        int[] nums1 = new int[]{1,2,3,0,0,0};
-        int m = 3;
-        int[] nums2 = new int[]{2,5,6};
-        int n = 3;
-        merge5(nums1, m, nums2, n);
+        int[] nums1 = new int[]{0};
+        int m = 0;
+        int[] nums2 = new int[]{1};
+        int n = 1;
+        merge(nums1, m, nums2, n);
         //   System.out.println(postion(nums1, 2));
 
         // insert(nums1,2,1);
