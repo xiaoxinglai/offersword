@@ -98,7 +98,7 @@ public class Solution {
             return false;
         }
 
-        return  isSameTree2(p.left,p.left)&&isSameTree2(p.right,p.right);
+        return  isSameTree2(p.left,q.left)&&isSameTree2(p.right,q.right);
     }
 
 
