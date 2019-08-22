@@ -57,7 +57,44 @@ public class Solution {
         }
 
         Collections.reverse(result);
+        //倒序也可以全放栈里，然后倒出来
         return result;
+    }
+
+
+
+    /**
+     * 层次遍历 递归解法
+     * 每个节点将自己的值放到该节点所在层数对应的列表里面
+     * 然后每个节点的左子树 将自己的值放到层数+1对应的列表里面
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrderBottom2(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<Integer>());
+        count(root,0,result);
+        Collections.reverse(result);
+        return result;
+    }
+
+    public void count(TreeNode root,int dept ,List<List<Integer>> result) {
+
+        if (root==null){
+            return;
+        }
+
+        //深度大于列表长度
+        if (dept+1>result.size()){
+            List<Integer> list=new ArrayList<>();
+            result.add(list);
+        }
+
+        result.get(dept).add(root.val);
+
+        count(root.left,dept+1,result);
+        count(root.right,dept+1,result);
     }
 
 
