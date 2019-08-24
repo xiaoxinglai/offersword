@@ -44,7 +44,7 @@ public class Solution {
      * @param root
      * @return
      */
-    public int maxDepth(TreeNode root) {
+    public static int maxDepth(TreeNode root) {
 
         if (root == null) {
             return 0;
@@ -56,6 +56,8 @@ public class Solution {
 
         return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
+
+
 
 
 //    /**
