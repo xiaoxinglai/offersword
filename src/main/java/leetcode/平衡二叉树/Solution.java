@@ -55,12 +55,15 @@ public class Solution {
             return true;
         }
         //当前节点的两个子树差是不是大于2 与上 当前节点的左子树的的子节点高度差是不是大于2 与上 前节点的右子树的的子节点高度差是不是大于2
-        return Math.abs(height(root.left)-height(root.right))<2&&isBalanced(root.left)&&isBalanced(root.right);
+        //这种方式 需要递归每一个节点，有n个节点，每个节点递归n次， 所以是nxn的复杂度
+        //即是判断了每一个节点为根节点时候 是不是平衡二叉树，如果都是 就是平衡二叉树 ，但是会产生大量的重复计算
+        return Math.abs(height(root.left) - height(root.right)) < 2 && isBalanced(root.left) && isBalanced(root.right);
     }
 
 
     /**
      * 求最大深度
+     *
      * @param root
      * @return
      */
@@ -70,6 +73,43 @@ public class Solution {
         }
 
         return 1 + Math.max(height(root.left), height(root.right));
+    }
+
+
+    /**
+     * 提前阻断法 自地向上，找每个节点的左右子树高度差，只要发现了一个不符合就立刻返回
+     *
+     * @param root
+     * @return
+     */
+    public boolean isBalanced2(TreeNode root) {
+        return height2(root) != -1;
+    }
+
+    int height2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int left = height2(root.left);
+
+        if (left == -1) {
+            return -1;
+        }
+
+        int right = height2(root.right);
+
+        if (right == -1) {
+            return -1;
+        }
+
+        if (Math.abs(left - right) > 1) {
+            return -1;
+        } else {
+            //计算深度
+            return 1+Math.max(left,right);
+        }
+
     }
 
 
