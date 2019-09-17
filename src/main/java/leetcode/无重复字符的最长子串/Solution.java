@@ -58,7 +58,7 @@ public class Solution {
 
     /**
      * 使用了一定的优化  避开了重复的比较 n
-     *
+     * 滑动窗口
      *
      * @param s
      * @return
@@ -76,7 +76,7 @@ public class Solution {
 
             if (hashMap.get(String.valueOf(a[i])) != null) {
                 //重新定位i的位置
-                i = next(i, s,hashMap)-1;
+                i = next(i, s, hashMap) - 1;
                 hashMap.clear();
             } else {
                 hashMap.put(String.valueOf(a[i]), String.valueOf(i));
@@ -91,28 +91,28 @@ public class Solution {
 
 
     static int next(int i, String s, LinkedHashMap<String, String> hashMap) {
-        String s1 ="";
+        String s1 = "";
         for (Map.Entry<String, String> stringStringEntry : hashMap.entrySet()) {
-            s1+=stringStringEntry.getKey();
+            s1 += stringStringEntry.getKey();
         }
 
 
-        String s2 = s.substring(i, s.length() );
+        String s2 = s.substring(i, s.length());
         char[] sc1 = s1.toCharArray();
         char[] sct = s2.toCharArray();
 
-        int j=0;
+        int j = 0;
         //找到两个字串相同的位置
-        while (sc1[j]!=sct[0]){
+        while (sc1[j] != sct[0]) {
             j++;
-            if (j>sc1.length||j>sct.length){
+            if (j > sc1.length || j > sct.length) {
                 return i;
             }
         }
 
-        for (int i1 = j,i2=0;i1<sc1.length &&i2< sct.length; i1++,i2++) {
+        for (int i1 = j, i2 = 0; i1 < sc1.length && i2 < sct.length; i1++, i2++) {
             //在字串相同的位置继续查找
-            if (sc1[i1]!=sct[i2]){
+            if (sc1[i1] != sct[i2]) {
                 return Integer.valueOf(hashMap.get(String.valueOf(sc1[i1])));
             }
         }
@@ -120,7 +120,37 @@ public class Solution {
     }
 
 
+    /**
+     * 滑动窗口完善版本
+     *
+     * @param s
+     * @return
+     */
+    public static int lengthOfLongestSubstring3(String s) {
+        if (s.length() == 0) {
+            return 0;
+        }
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        int left = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+
+            //如果以前出现过 则重置位置
+            if (map.containsKey(s.charAt(i))) {
+                left=Math.max(left,map.get(s.charAt(i))+1);
+            }
+            map.put(s.charAt(i),i);
+            max = Math.max(max,i-left+1);
+
+        }
+
+        return max;
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring2("ohvhjdml"));
+        System.out.println(lengthOfLongestSubstring3("ohvhjdml"));
     }
 }
