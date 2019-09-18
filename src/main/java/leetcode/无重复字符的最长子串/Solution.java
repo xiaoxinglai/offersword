@@ -136,14 +136,14 @@ public class Solution {
         int left = 0;
 
         for (int i = 0; i < s.length(); i++) {
-
-            //如果以前出现过 则重置位置
+            //如果以前出现过 则重置位置 将窗口左边界右移
             if (map.containsKey(s.charAt(i))) {
                 left=Math.max(left,map.get(s.charAt(i))+1);
             }
+            //如果有出现重复的字符 就重置这个重复的字符的位置
             map.put(s.charAt(i),i);
+            //计算当前的最大长度
             max = Math.max(max,i-left+1);
-
         }
 
         return max;
